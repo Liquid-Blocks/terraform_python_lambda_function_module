@@ -32,7 +32,7 @@ module "my_function_name" {
 Once the structure is in place:
 
 1. Configure AWS SSO using the command `aws configure sso`.
-   ⚠️ The profile name you use in SSO must be the same as in `main.tf` on line 2.
+        The profile name you use in SSO must be the same as in `main.tf` on line 2.
 2. Initialize Terraform using the command `terraform init`.
 3. Apply the changes using the command `terraform apply`.
 
