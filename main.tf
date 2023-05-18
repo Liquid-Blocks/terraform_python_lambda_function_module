@@ -1,8 +1,3 @@
-/**
- * His this a header ?
- *
- */
-
 resource "null_resource" "install_dependencies" {
   
   provisioner "local-exec" {
@@ -57,4 +52,20 @@ resource "aws_iam_role_policy_attachment" "policy_attachment" {
 
   role       = aws_iam_role.lambda_function_role.name
   policy_arn = each.value
+}
+
+# This next part takes care off seting a custom policy if one is defined.
+
+resource "aws_iam_policy" "custom_inline_policy" {
+  count = var.custom_policy != null ? 1 : 0
+
+  name        = "${var.function_name}_custom_policy"
+  policy      = var.custom_policy
+}
+
+resource "aws_iam_role_policy_attachment" "custom_policy_attachement" {
+  count = var.custom_policy != null ? 1 : 0
+
+  role = aws_iam_role.lambda_function_role.name
+  policy_arn = aws_iam_policy.custom_inline_policy.arn
 }

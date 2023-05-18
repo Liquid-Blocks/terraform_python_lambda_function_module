@@ -28,3 +28,9 @@ variable "amazon_policy_list" {
     "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
   ]
 }
+
+variable "custom_policy" {
+  description = "A custom IAM policy to attach to the execution role"
+  type = string
+  default = null
+}
