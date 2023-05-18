@@ -67,5 +67,5 @@ resource "aws_iam_role_policy_attachment" "custom_policy_attachement" {
   count = var.custom_policy != null ? 1 : 0
 
   role = aws_iam_role.lambda_function_role.name
-  policy_arn = aws_iam_policy.custom_inline_policy.arn
+  policy_arn = aws_iam_policy.custom_inline_policy[count.index].arn
 }
