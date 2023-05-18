@@ -40,3 +40,9 @@ variable "environment_variables" {
   type        = map(string)
   default     = {}
 }
+
+variable "timeout" {
+  description = "Time before function goes into error times out"
+  type = number
+  default = 3
+}
