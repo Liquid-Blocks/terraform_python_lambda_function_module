@@ -20,3 +20,11 @@ variable "memory_size" {
   type        = number
   default = 128
 }
+
+variable "amazon_policy_list" {
+  description = "list of aws managed policies to attach. Defaults to de basic execution role"
+  type = list(string)
+  default = [
+    "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+  ]
+}

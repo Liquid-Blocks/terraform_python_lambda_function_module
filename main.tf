@@ -47,7 +47,9 @@ resource "aws_iam_role" "lambda_function_role" {
 EOF
 }
 
-resource "aws_iam_role_policy_attachment" "lambda_function_role_policy_attachment" {
-  policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+resource "aws_iam_role_policy_attachment" "policy_attachment" {
+  for_each = toset(var.amazon_policy_list)
+
   role       = aws_iam_role.lambda_function_role.name
+  policy_arn = each.value
 }
