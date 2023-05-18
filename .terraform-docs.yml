@@ -1,0 +1,12 @@
+formatter: markdown table
+header-from: header.md
+content: |-
+  # Python Lambda Function Using Terraform
+  {{ .Header }}
+  
+  
+  {{ .Providers }}
+  {{ .Resources }}
+  {{ .Inputs }}
+  {{ .Footer }}
+ 

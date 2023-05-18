@@ -1,5 +1,5 @@
 variable "function_name" {
-  description = "The name of the Lambda function."
+  description = "The name of the Lambda function.\nChose an unique and meanifull name as it will appear in the console."
   type        = string
 }
 
@@ -10,7 +10,7 @@ variable "handler" {
 }
 
 variable "runtime" {
-  description = "The runtime for the Lambda function."
+  description = "The runtime for the Lambda function. This should be a valid version of python."
   type        = string
   default = "python3.8"
 }
@@ -22,7 +22,7 @@ variable "memory_size" {
 }
 
 variable "amazon_policy_list" {
-  description = "list of aws managed policies to attach. Defaults to de basic execution role"
+  description = "list of aws managed policies to attach.\nDefaults to de basic execution role."
   type = list(string)
   default = [
     "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
