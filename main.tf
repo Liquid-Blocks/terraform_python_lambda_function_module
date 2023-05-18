@@ -25,6 +25,10 @@ resource "aws_lambda_function" "lambda_function" {
   runtime       = var.runtime
   memory_size   = var.memory_size
 
+  environment {
+    variables = var.environment_variables
+  }
+
   source_code_hash = data.archive_file.function_zip.output_base64sha256
 }
 

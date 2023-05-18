@@ -34,3 +34,9 @@ variable "custom_policy" {
   type = string
   default = null
 }
+
+variable "environment_variables" {
+  description = "Map of environment variables for the Lambda function"
+  type        = map(string)
+  default     = {}
+}
