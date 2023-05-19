@@ -60,18 +60,20 @@ resource "aws_iam_role_policy_attachment" "policy_attachment" {
 }
 
 # This next part takes care off seting a custom policy if one is defined.
+locals {
+  custom_policy_map = var.custom_policy != null ? { "custom_policy" = var.custom_policy } : {}
+}
 
 resource "aws_iam_policy" "custom_inline_policy" {
-  count = var.custom_policy != null ? 1 : 0
+  for_each = local.custom_policy_map
 
-  name        = "${var.function_name}_custom_policy"
-  policy      = var.custom_policy
+  name   = "${var.function_name}_custom_policy"
+  policy = each.value
 }
 
 resource "aws_iam_role_policy_attachment" "custom_policy_attachement" {
-  depends_on = [ aws_iam_policy.custom_inline_policy ]
-  count = var.custom_policy != null ? 1 : 0
+  for_each = local.custom_policy_map
 
-  role = aws_iam_role.lambda_function_role.name
-  policy_arn = aws_iam_policy.custom_inline_policy[count.index].arn
+  role       = aws_iam_role.lambda_function_role.name
+  policy_arn = aws_iam_policy.custom_inline_policy[each.key].arn
 }
