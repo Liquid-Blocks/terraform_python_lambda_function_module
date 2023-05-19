@@ -69,6 +69,7 @@ resource "aws_iam_policy" "custom_inline_policy" {
 }
 
 resource "aws_iam_role_policy_attachment" "custom_policy_attachement" {
+  depends_on = [ aws_iam_policy.custom_inline_policy ]
   count = var.custom_policy != null ? 1 : 0
 
   role = aws_iam_role.lambda_function_role.name
